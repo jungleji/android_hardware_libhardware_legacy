@@ -21,6 +21,32 @@
 extern "C" {
 #endif
 
+enum WIFI_CHIP_TYPE_LIST{
+    RTL8188CU = 0,
+    RTL8192CU,
+    RTL8188EU,
+    RT3070,
+    BCM4329,
+    BCM4319,
+    BCM43x9,
+    BCM4330,
+    RK901,
+    RK903,
+    OOB_RK901,
+    OOB_RK903,
+    RT5370,
+    MT7601,
+    RTL8723AS,
+    RTL8723AU,
+    RTL8189ES,
+    RTL8192DU,
+    MT6620,
+    ESP8089,
+    NUM_MAX,
+};
+
+int check_wifi_chip_type(void);
+
 /**
  * Load the Wi-Fi driver.
  *
