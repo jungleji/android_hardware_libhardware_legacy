@@ -76,6 +76,12 @@ struct nl_cache *nl_cache;
 struct genl_family *nl80211;
 #endif
 
+#ifndef WIFI_DRIVER_MODULE_NAME
+#define WIFI_DRIVER_MODULE_NAME    "wlan"
+#endif
+
+#undef  WIFI_DRIVER_MODULE_PATH /* cancel defined WIFI_DRIVER_MODULE_PATH , because we use built-in driver*/
+
 #ifndef WIFI_DRIVER_MODULE_ARG
 #define WIFI_DRIVER_MODULE_ARG          ""
 #endif
@@ -278,6 +284,7 @@ int wifi_load_driver()
     char driver_status[PROPERTY_VALUE_MAX];
     int count = 100; /* wait at most 20 seconds for completion */
     char module_arg2[256];
+    ALOGD("%s: def WIFI_DRIVER_MODULE_PATH", __FUNCTION__);
 #ifdef SAMSUNG_WIFI
     char* type = get_samsung_wifi_type();
 
@@ -332,6 +339,8 @@ int wifi_load_driver()
     wifi_unload_driver();
     return -1;
 #else
+    ALOGD("%s: undef WIFI_DRIVER_MODULE_PATH", __FUNCTION__);
+
     property_set(DRIVER_PROP_NAME, "ok");
     return 0;
 #endif
